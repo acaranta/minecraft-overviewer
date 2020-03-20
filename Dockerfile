@@ -25,6 +25,7 @@ ENV RENDER_SIGNS_JOINER "<br />"
 
 ENV CONFIG_LOCATION /home/minecraft/config.py
 
+# Docs for rcon-cli here: https://github.com/itzg/rcon-cli
 ENV RCON_ARGS_PRE ""
 ENV RCON_ARGS_POST ""
 
