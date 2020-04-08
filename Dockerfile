@@ -30,20 +30,20 @@ ENV RCON_ARGS_PRE ""
 ENV RCON_ARGS_POST ""
 
 RUN apt-get update && \
-    apt-get install -y wget gnupg optipng && \
+    apt-get install -y --no-install-recommends wget gnupg optipng ca-certificates && \
     echo "deb http://overviewer.org/debian ./" >> /etc/apt/sources.list && \
     wget -O - https://overviewer.org/debian/overviewer.gpg.asc | apt-key add - && \
     apt-get update && \
-    apt-get install -y minecraft-overviewer && \
+    apt-get install -y --no-install-recommends minecraft-overviewer && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     useradd -m minecraft && \
     mkdir -p /home/minecraft/render /home/minecraft/server
 
-# Copied from https://github.com/itzg/easy-add
 # Install rcon-cli
-ADD https://github.com/itzg/rcon-cli/releases/download/1.4.7/rcon-cli_1.4.7_linux_amd64.tar.gz /tmp/rcon-cli.tgz
-RUN tar -xf /tmp/rcon-cli.tgz -C /usr/local/bin rcon-cli && rm /tmp/rcon-cli.tgz
+RUN wget "https://github.com/itzg/rcon-cli/releases/download/1.4.7/rcon-cli_1.4.7_linux_amd64.tar.gz" -O /tmp/rcon-cli.tgz && \
+    tar -xf /tmp/rcon-cli.tgz -C /usr/local/bin rcon-cli && \
+    rm /tmp/rcon-cli.tgz
 
 COPY config/config.py /home/minecraft/config.py
 COPY entrypoint.sh /home/minecraft/entrypoint.sh
