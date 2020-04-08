@@ -10,7 +10,7 @@ fi
 # Download Minecraft client .jar (Contains textures used by Minecraft Overviewer)
 CLIENT_URL=$(python3 /home/minecraft/download_url.py "$MINECRAFT_VERSION")
 echo "Using Client URL $CLIENT_URL."
-wget -N "${CLIENT_URL}" -O "${MINECRAFT_VERSION}.jar" -P /home/minecraft/.minecraft/versions/"${MINECRAFT_VERSION}"/
+wget -N "${CLIENT_URL}" -O "${MINECRAFT_VERSION}.jar" -P "/home/minecraft/.minecraft/versions/${MINECRAFT_VERSION}/"
 
 if [ -n "$RCON_ARGS_PRE" ]; then
   rcon-cli $RCON_ARGS_PRE
