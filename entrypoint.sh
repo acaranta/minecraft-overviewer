@@ -13,19 +13,23 @@ echo "Using Client URL $CLIENT_URL."
 wget -N "${CLIENT_URL}" -O "${MINECRAFT_VERSION}.jar" -P "/home/minecraft/.minecraft/versions/${MINECRAFT_VERSION}/"
 
 if [ -n "$RCON_ARGS_PRE" ]; then
+  # shellcheck disable=SC2086
   rcon-cli $RCON_ARGS_PRE
 fi
 
 # Render the Map
 if [ "$RENDER_MAP" == "true" ]; then
+  # shellcheck disable=SC2086
   overviewer.py --config "$CONFIG_LOCATION" $ADDITIONAL_ARGS
 fi
 
 # Render the POI
 if [ "$RENDER_POI" == "true" ]; then
+  # shellcheck disable=SC2086
   overviewer.py --config "$CONFIG_LOCATION" --genpoi $ADDITIONAL_ARGS_POI
 fi
 
 if [ -n "$RCON_ARGS_POST" ]; then
+  # shellcheck disable=SC2086
   rcon-cli $RCON_ARGS_POST
 fi
