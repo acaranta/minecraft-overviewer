@@ -28,14 +28,28 @@ ENV RENDER_SIGNS_JOINER "<br />"
 
 ENV CONFIG_LOCATION /home/minecraft/config.py
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends ca-certificates wget gnupg optipng && \
-    echo "deb http://overviewer.org/debian ./" >> /etc/apt/sources.list && \
-    wget -O - https://overviewer.org/debian/overviewer.gpg.asc | apt-key add - && \
-    apt-get update && \
-    apt-get install -y --no-install-recommends minecraft-overviewer && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
-    groupadd minecraft -g 1000 && \
+# Build Overviewer freom source
+RUN apt-get update                                                      && \
+    apt-get install -y                                                     \
+        python3                                                            \
+        build-essential                                                    \
+        python3-pip                                                        \
+        python3-pillow                                                     \
+        python3-numpy                                                      \
+        git                                                             && \
+    mkdir /tmp/buildover                                                && \
+    cd /tmp/buildover                                                   && \
+    git clone https://github.com/overviewer/Minecraft-Overviewer.git .  && \
+    python3 setup.py build                                              && \
+    apt-get purge -y                                                       \
+        build-essential                                                    \
+        python3-pip                                                        \
+        git                                                             && \
+    apt-get autoremove -y                                               && \
+    apt-get clean                                                       && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN groupadd minecraft -g 1000 && \
     useradd -m minecraft -u 1000 -g 1000 && \
     mkdir -p /home/minecraft/render /home/minecraft/server
 
