@@ -36,6 +36,7 @@ RUN apt-get update                                                      && \
         python3-pip                                                        \
         python3-pillow                                                     \
         python3-numpy                                                      \
+        wget                                                               \
         git                                                             && \
     mkdir /tmp/buildover                                                && \
     cd /tmp/buildover                                                   && \
