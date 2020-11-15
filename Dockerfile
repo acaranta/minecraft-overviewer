@@ -42,6 +42,7 @@ RUN apt-get update                                                      && \
     cd /tmp/buildover                                                   && \
     git clone https://github.com/overviewer/Minecraft-Overviewer.git .  && \
     python3 setup.py build                                              && \
+    python3 setup.py install                                            && \
     apt-get purge -y                                                       \
         build-essential                                                    \
         python3-pip                                                        \
