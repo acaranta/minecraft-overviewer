@@ -6,9 +6,12 @@
 # The Minecraft-Overviewer render will be output at
 #     /home/minecraft/render
 
-FROM debian:stretch
+FROM ubuntu:20.04
 
 LABEL MAINTAINER='Mark Ide Jr (https://www.mide.io)'
+
+#Default Loop Wait Time
+ENV WAIT_MINUTES 7200
 
 # Default to do both render Map + POI
 ENV RENDER_MAP true
