@@ -12,6 +12,7 @@ This project's code is hosted on [GitHub](https://github.com/mide/minecraft-over
 docker pull mide/minecraft-overviewer:latest
 docker run \
   --rm \
+  -e WAIT_MINUTES=7200
   -e MINECRAFT_VERSION="1.14.1" \
   -v /home/user/minecraft/:/home/minecraft/server/:ro \
   -v /srv/http/minecraft/:/home/minecraft/render/:rw \
@@ -50,3 +51,7 @@ docker run \
 
 - `RENDER_SIGNS_JOINER`
   Default Value: `<br />`. Set to the string that should be used to join the lines on the sign while rendering. Value of `"<br />"` will make each in-game line it's own line on the render. A value of `" "` will make all the in-game lines a single line on the render.
+
+- `WAIT_MINUTES`
+  Default Value: `7200`. Set to number of time in minutes to wait between runs
+
